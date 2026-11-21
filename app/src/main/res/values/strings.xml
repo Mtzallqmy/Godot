@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MedVerse 3D</string>
+    <string name="app_tagline_en">Interactive Medical Universe</string>
+    <string name="app_tagline_ar">عالم الطب التفاعلي ثلاثي الأبعاد</string>
+    <string name="developer_credit">برمجة وتطوير معتز العلقمي – تعز – اليمن – 2026م</string>
+    <string name="cd_app_logo">MedVerse 3D Emblem</string>
+    <string name="cd_hero_backdrop">Scientific medical coordinate backdrop</string>
+</resources>

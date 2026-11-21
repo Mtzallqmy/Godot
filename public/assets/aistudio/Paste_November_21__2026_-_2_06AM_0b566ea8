@@ -1,0 +1,1681 @@
+
+# MEDVERSE 3D — PHASE 03
+## ADVANCED HUMAN PHYSIOLOGY & INTERACTIVE ORGAN SIMULATION LAB
+### Biomedical Visualization • Real-Time 3D Animation • Scientific Simulation
+### Google AI Studio • React • TypeScript • Three.js • React Three Fiber
+### Bilingual Medical Education • Premium Interactive Web Experience
+
+================================================================
+00 — EXECUTIVE MISSION
+================================================================
+
+You are the complete senior engineering and scientific
+development team responsible for MEDVERSE 3D.
+
+Your team includes:
+
+- Chief Medical Technology Architect
+- Senior React and TypeScript Engineer
+- Principal Three.js and WebGL Engineer
+- Biomedical Simulation Software Engineer
+- Human Physiology Subject Matter Specialist
+- Cardiovascular Physiology Consultant
+- Respiratory Physiology Consultant
+- Neuroscience Education Consultant
+- Renal Physiology Consultant
+- Gastrointestinal Physiology Consultant
+- Scientific Animation and 3D Rigging Engineer
+- Medical Visualization UX Designer
+- Arabic-English Medical Terminology Specialist
+- Data Visualization Engineer
+- Performance and Accessibility Engineer
+- Scientific Quality Assurance Engineer
+
+PROJECT:
+
+MEDVERSE 3D
+عالم الطب التفاعلي ثلاثي الأبعاد
+
+OFFICIAL OWNER CREDIT:
+
+برمجة وتطوير معتز العلقمي – تعز – اليمن – 2026م
+
+MISSION:
+
+Transform the existing interactive anatomical atlas
+into a sophisticated educational human physiology
+simulation laboratory.
+
+Students must be able to explore how supported
+human organs function through synchronized
+3D anatomical visualization, explanatory
+animations, scientific data, interactive controls,
+and educational physiological scenarios.
+
+The target is an impressive, scientifically
+responsible, interactive medical education
+platform, not a static animation gallery.
+
+THIS IS AN IMPLEMENTATION MANDATE.
+
+Create actual working code, animations,
+controls, reusable systems, tests, and
+scientifically reviewed educational content.
+
+Do not produce only specifications or
+nonfunctional demonstrations.
+
+================================================================
+01 — FIRST ACTION: COMPLETE PROJECT AUDIT
+================================================================
+
+Before writing major new features:
+
+Inspect the entire current application,
+including all work completed in Phases 01 and 02.
+
+Review:
+
+- React and TypeScript architecture
+- Application routing
+- Existing Three.js scenes
+- React Three Fiber components
+- Anatomical 3D model loader
+- Anatomical asset registry
+- Organ selection system
+- Layer visibility management
+- Organ isolation system
+- Camera navigation
+- Medical information panels
+- Anatomical terminology database
+- Arabic-English localization
+- Medical reference metadata
+- Mobile responsiveness
+- Existing performance optimizations
+- Current test coverage
+
+Create a verified feature inventory.
+
+Identify:
+
+WORKING FEATURES
+PARTIALLY IMPLEMENTED FEATURES
+MISSING FEATURES
+TECHNICAL ERRORS
+ASSET LIMITATIONS
+SCIENTIFIC REVIEW GAPS
+
+Preserve all valid existing functionality.
+
+Do not delete or replace working components
+merely to simplify implementation.
+
+Reuse the existing anatomical model registry
+and stable anatomical structure IDs.
+
+If earlier phases contain unfinished systems,
+repair dependencies required for Phase 03
+before building on top of them.
+
+Never report unverified earlier functionality
+as complete.
+
+================================================================
+02 — PHASE 03 ENGINEERING OBJECTIVES
+================================================================
+
+Implement:
+
+A. Interactive Human Physiology Laboratory
+
+B. Unified Real-Time Simulation Timeline
+
+C. 3D Cardiovascular Function Laboratory
+
+D. Cardiac Cycle Animation and Valve Visualization
+
+E. Educational Blood Circulation Visualization
+
+F. Respiratory Mechanics Laboratory
+
+G. Alveolar Gas Exchange Visualization
+
+H. Neural Signal Transmission Laboratory
+
+I. Renal Filtration and Nephron Laboratory
+
+J. Gastrointestinal Function Laboratory
+
+K. Interactive Physiology Parameters
+
+L. Real-Time Educational Charts
+
+M. Arabic-English Scientific Explanation System
+
+N. Organ-Level Simulation Navigation
+
+O. Scientific Validity and Provenance System
+
+P. Performance, Accessibility, and Testing
+
+Prioritize fully functioning educational
+scenarios over large numbers of superficial
+or fake simulations.
+
+================================================================
+03 — SCIENTIFIC SIMULATION INTEGRITY
+================================================================
+
+This requirement is mandatory.
+
+Explicitly distinguish three levels:
+
+LEVEL A — SCIENTIFICALLY VALIDATED MODEL
+
+A mathematical or computational physiological
+model with documented assumptions, parameters,
+source references, limitations, and validation
+evidence appropriate to its intended use.
+
+LEVEL B — SCIENTIFICALLY INFORMED EDUCATIONAL MODEL
+
+A simplified educational representation of
+a physiological process with explained
+assumptions and scientifically supported
+relationships, but not clinically validated
+for individual prediction.
+
+LEVEL C — ILLUSTRATIVE ANIMATION
+
+A visual teaching aid showing the direction,
+sequence, or general behavior of a process.
+
+Do not label Level B or Level C as validated
+medical simulations.
+
+Do not imply that visual realism proves
+scientific or physiological accuracy.
+
+Do not invent:
+
+- Hemodynamic measurements
+- Oxygen saturation predictions
+- Patient-specific ECG signals
+- Blood pressure relationships
+- Drug concentrations
+- Clinical diagnostic conclusions
+- Anatomical structures
+- Physiological equations
+
+Every numerical model must document
+its equations, units, assumptions,
+valid parameter ranges, and limitations.
+
+Clearly label illustrative values.
+
+The application is for education,
+not medical diagnosis or patient management.
+
+================================================================
+04 — PHYSIOLOGY LABORATORY EXPERIENCE
+================================================================
+
+Create a new primary application route:
+
+/physiology
+
+Build a premium laboratory interface.
+
+Desktop layout:
+
+-------------------------------------------------------
+TOP NAVIGATION + LANGUAGE SWITCHER
+-------------------------------------------------------
+BODY SYSTEMS | INTERACTIVE 3D SCENE | DETAILS
+-------------------------------------------------------
+         SIMULATION CONTROLS
+-------------------------------------------------------
+       PHYSIOLOGICAL CHARTS
+-------------------------------------------------------
+
+The interface must feel like a modern
+biomedical simulation workstation.
+
+Required elements:
+
+- Anatomical system selector
+- Interactive organ visualization
+- Play and pause controls
+- Reset simulation button
+- Animation speed controller
+- Educational scenario selector
+- Phase indicator
+- Parameter control panel
+- Physiological explanation panel
+- Source and validity information
+- Interactive charts
+- Fullscreen mode
+
+Mobile layout:
+
+Use a large primary 3D viewport.
+
+Place complex controls inside
+responsive drawers and bottom sheets.
+
+Avoid obstructing the medical visualization.
+
+Ensure complete Arabic RTL and English LTR
+support across all controls.
+
+================================================================
+05 — UNIVERSAL SIMULATION ENGINE
+================================================================
+
+Create a reusable simulation framework.
+
+Suggested modules:
+
+PhysiologySimulationEngine
+SimulationClock
+SimulationStateManager
+SimulationTimeline
+SimulationParameterRegistry
+SimulationEventBus
+PhysiologicalScenarioManager
+AnatomicalAnimationController
+PhysiologyChartAdapter
+SimulationValidationService
+SimulationLifecycleManager
+
+Core functions:
+
+initialize()
+start()
+pause()
+resume()
+reset()
+setSpeed()
+setParameter()
+loadScenario()
+getState()
+dispose()
+
+Use a deterministic simulation clock.
+
+Do not use React state updates on every
+graphics frame for high-frequency animation.
+
+Keep the numerical simulation clock,
+rendering interpolation, and UI state
+appropriately separated.
+
+Use controlled requestAnimationFrame
+or the React Three Fiber rendering loop.
+
+Support:
+
+Simulation time
+Elapsed time
+Playback speed
+Phase transitions
+Pause and resume
+Reset
+Parameter changes
+Visualization synchronization
+
+Handle browser tab suspension safely.
+
+Avoid unstable time deltas and
+unbounded numerical integration.
+
+If mathematical solvers are needed,
+choose stable numerical methods
+appropriate to the implemented equations.
+
+Do not invent physical units or
+use unbounded sliders.
+
+================================================================
+06 — CARDIOVASCULAR LABORATORY
+================================================================
+
+Create a detailed interactive
+cardiovascular physiology experience.
+
+Primary anatomical structures:
+
+Heart
+Right Atrium
+Left Atrium
+Right Ventricle
+Left Ventricle
+Tricuspid Valve
+Mitral Valve
+Pulmonary Valve
+Aortic Valve
+Aorta
+Pulmonary Artery
+Pulmonary Veins
+Superior Vena Cava
+Inferior Vena Cava
+
+Reuse verified Phase 02 anatomical assets.
+
+The scene must allow users to:
+
+- Rotate the heart
+- Zoom in and out
+- Isolate cardiac chambers
+- Select valves
+- Inspect associated vessels
+- Display internal anatomy where
+  source geometry supports it
+- Switch anatomical labels
+- View cardiac cycle phases
+
+Implement a cardiac cycle timeline.
+
+Educational phases should include:
+
+Atrial Systole
+Isovolumetric Ventricular Contraction
+Ventricular Ejection
+Isovolumetric Ventricular Relaxation
+Ventricular Filling
+
+Synchronize:
+
+- Educational cardiac motion
+- Chamber highlights
+- Valve states
+- Directional blood flow indicators
+- Cardiac cycle timeline
+- Explanatory labels
+
+Cardiac muscle deformation should use
+suitable validated source animation,
+rigging, morph targets, or a clearly
+identified illustrative model.
+
+Do not physically deform real
+anatomical meshes through arbitrary
+uniform scaling and claim it represents
+accurate cardiac mechanics.
+
+================================================================
+07 — HEART RATE AND CYCLE CONTROLS
+================================================================
+
+Implement an educational heart-rate control.
+
+Example adult resting-rate exploration:
+
+60 BPM
+75 BPM
+90 BPM
+100 BPM
+
+These values are illustrative presets,
+not measurements of a real person.
+
+Allow the user to observe how the
+educational animation cycle changes
+as heart rate increases or decreases.
+
+Keep animation timing synchronized.
+
+Provide:
+
+Play
+Pause
+Restart
+Slow Motion
+Normal Speed
+Selected BPM display
+
+Important:
+
+The animation speed setting and
+the physiological heart-rate parameter
+must be treated as different controls.
+
+Playback speed changes the speed
+of viewing a simulation.
+
+Heart rate changes a physiological
+model parameter.
+
+Do not confuse these concepts.
+
+When model assumptions do not support
+predictions for stroke volume,
+cardiac output, or blood pressure,
+do not invent dependent values.
+
+If a simplified validated relationship
+is used, document and test it.
+
+================================================================
+08 — BLOOD CIRCULATION VISUALIZATION
+================================================================
+
+Create a scientifically informed
+circulatory pathway visualization.
+
+Show:
+
+SYSTEMIC CIRCULATION
+
+Left Ventricle
+→ Aorta
+→ Systemic Arteries
+→ Systemic Capillaries
+→ Systemic Veins
+→ Venae Cavae
+→ Right Atrium
+
+PULMONARY CIRCULATION
+
+Right Ventricle
+→ Pulmonary Arteries
+→ Pulmonary Capillaries
+→ Pulmonary Veins
+→ Left Atrium
+
+Represent oxygenation using an
+accessible educational color legend.
+
+Use conventional red and blue
+visual representations where suitable.
+
+Explain that blood is not literally
+blue when deoxygenated.
+
+Support:
+
+- Animated directional flow
+- Pathway highlighting
+- Vessel information
+- Flow direction labels
+- Oxygenated and deoxygenated categories
+- Separate pulmonary and systemic views
+
+Blood-flow particles must follow
+defined educational vascular paths.
+
+Do not use random particle motion
+to imply physiological accuracy.
+
+If quantitative flow is displayed,
+it must derive from a documented model.
+
+================================================================
+09 — CARDIAC ELECTRICAL ACTIVITY
+================================================================
+
+Create a cardiac electrical
+conduction educational module.
+
+Show the sequence:
+
+Sinoatrial Node
+Atrial Conduction
+Atrioventricular Node
+Bundle of His
+Bundle Branches
+Purkinje Fibers
+
+Visualize the propagation of
+an electrical activation signal.
+
+Provide synchronized educational
+cardiac cycle annotations.
+
+Include a clearly labeled
+schematic ECG waveform if appropriate.
+
+Important:
+
+A schematic ECG is not a recorded
+patient ECG and must not be
+presented as diagnostic data.
+
+Do not synthesize realistic-looking
+pathological ECG readings and claim
+clinical accuracy.
+
+Support:
+
+Educational waveform explanation
+P Wave
+QRS Complex
+T Wave
+
+Show a brief explanation of
+what each represents.
+
+================================================================
+10 — RESPIRATORY PHYSIOLOGY LABORATORY
+================================================================
+
+Build a detailed interactive
+respiratory mechanics experience.
+
+Structures:
+
+Right Lung
+Left Lung
+Trachea
+Main Bronchi
+Bronchial Tree
+Alveolar Region
+Diaphragm
+Thoracic Cavity
+
+Required visualizations:
+
+- Inspiration
+- Expiration
+- Diaphragm movement
+- Chest volume changes
+- Air movement direction
+- Respiratory cycle timeline
+- Basic alveolar gas exchange
+
+Use appropriate animated source geometry
+or clearly labeled illustrative motion.
+
+Respiratory controls:
+
+Breathing Rate
+Animation Playback Speed
+Pause
+Resume
+Reset
+Slow Motion
+
+Use scientifically appropriate
+parameter ranges and units.
+
+If specific lung volumes or pressures
+are displayed, ensure that a documented
+model supports those values.
+
+Do not fabricate tidal volume,
+oxygen saturation, or respiratory
+pressure measurements.
+
+================================================================
+11 — ALVEOLAR GAS EXCHANGE
+================================================================
+
+Create an educational close-up
+of the alveolar-capillary interface.
+
+Anatomical concepts:
+
+Alveolus
+Alveolar Membrane
+Pulmonary Capillary
+Oxygen
+Carbon Dioxide
+Red Blood Cells
+
+Visualize:
+
+Oxygen movement from alveolar gas
+toward pulmonary capillary blood.
+
+Carbon dioxide movement from blood
+toward alveolar gas.
+
+Display directional arrows or
+scientifically meaningful particles.
+
+Provide educational explanations:
+
+Partial Pressure Gradients
+Diffusion
+Gas Exchange
+Ventilation
+Perfusion
+
+Show that gas exchange is influenced
+by several physiological factors.
+
+Do not portray arbitrary animation
+speed as measured gas diffusion.
+
+Keep quantitative calculations disabled
+unless scientifically supported by
+documented equations and assumptions.
+
+================================================================
+12 — NEURAL PHYSIOLOGY LABORATORY
+================================================================
+
+Create a neuroscience educational
+simulation module.
+
+Structures and concepts:
+
+Neuron
+Cell Body
+Dendrites
+Axon
+Myelin Sheath
+Nodes of Ranvier
+Axon Terminal
+Synapse
+
+Show a signal transmission sequence:
+
+Stimulus
+→ Electrical Excitation
+→ Action Potential Propagation
+→ Axon Terminal Activation
+→ Synaptic Transmission
+→ Postsynaptic Response
+
+Provide an interactive 3D neuronal
+educational scene.
+
+Include:
+
+- Play and pause
+- Signal path visualization
+- Zoom into synapse
+- Select neuronal structures
+- Explanatory timeline
+- English and Arabic scientific labels
+
+Create an optional membrane
+potential chart only when supported
+by a documented model.
+
+If a simplified action potential
+is displayed, explicitly identify
+it as schematic unless derived from
+a validated electrophysiological model.
+
+Do not treat neural signal propagation
+as a visible flow of electricity through
+the body like fluid in a pipe.
+
+================================================================
+13 — RENAL PHYSIOLOGY LABORATORY
+================================================================
+
+Build an educational renal function
+visualization module.
+
+Structures:
+
+Kidney
+Renal Artery
+Renal Vein
+Nephron
+Glomerulus
+Bowman's Capsule
+Proximal Tubule
+Loop of Henle
+Distal Tubule
+Collecting Duct
+
+Visualize these core processes:
+
+Glomerular Filtration
+Tubular Reabsorption
+Tubular Secretion
+Urine Formation
+
+Use a structured nephron
+teaching scene.
+
+Allow learners to inspect:
+
+- Incoming blood flow
+- Filtrate formation
+- Tubular transport concepts
+- Direction of filtrate movement
+- Urine collection pathway
+
+Provide simplified educational
+transport diagrams.
+
+Do not equate a visual particle count
+with actual filtration rate.
+
+Do not calculate patient-specific
+eGFR or make clinical renal predictions
+in this module.
+
+Any numerical renal model must include
+its source, units, assumptions,
+valid domain, and validation evidence.
+
+================================================================
+14 — DIGESTIVE PHYSIOLOGY LABORATORY
+================================================================
+
+Create an interactive gastrointestinal
+function module.
+
+Structures:
+
+Esophagus
+Stomach
+Duodenum
+Small Intestine
+Large Intestine
+Liver
+Gallbladder
+Pancreas
+
+Educational processes:
+
+Swallowing
+Esophageal Transport
+Gastric Mixing
+Peristalsis
+Gastric Emptying Concepts
+Digestive Secretions
+Nutrient Digestion
+Nutrient Absorption
+Colonic Water Absorption
+
+Implement a visual educational journey
+through the digestive tract.
+
+Use real anatomical structure geometry
+where available.
+
+Visualize relevant motion using
+suitable rigs, mesh animation, or
+schematic teaching models.
+
+Support:
+
+Process Selection
+Play
+Pause
+Replay
+Speed Control
+Anatomical Labels
+Explanation Panels
+
+Do not represent arbitrary animation
+timing as real measured gastric emptying.
+
+Do not claim the model accurately predicts
+an individual's digestion.
+
+================================================================
+15 — INTERACTIVE EDUCATIONAL SCENARIOS
+================================================================
+
+Create a scenario system.
+
+The scenario must define:
+
+scenarioId
+titleEnglish
+titleArabic
+systemId
+descriptionEnglish
+descriptionArabic
+simulationLevel
+defaultParameters
+permittedParameterRanges
+expectedObservations
+educationalObjectives
+sourceReferences
+limitations
+
+Suggested scenarios:
+
+CARDIOVASCULAR
+
+- Normal Cardiac Cycle
+- Slower Educational Heart Cycle
+- Faster Educational Heart Cycle
+- Pulmonary Circulation Pathway
+- Systemic Circulation Pathway
+
+RESPIRATORY
+
+- Quiet Breathing
+- Faster Breathing
+- Alveolar Gas Exchange
+
+NEURAL
+
+- Basic Action Potential
+- Synaptic Transmission
+
+RENAL
+
+- Nephron Filtration Pathway
+- Tubular Reabsorption Concepts
+
+DIGESTIVE
+
+- Gastric Mixing
+- Intestinal Peristalsis
+- Nutrient Absorption Concepts
+
+Do not imply these are diagnostic
+disease simulations.
+
+Use scientifically accurate explanations
+of the differences between scenarios.
+
+================================================================
+16 — PHYSIOLOGICAL PARAMETER PANEL
+================================================================
+
+Build a reusable parameters panel.
+
+For each parameter display:
+
+- Name in English
+- Name in Arabic
+- Unit
+- Current value
+- Allowed range
+- Description
+- Model dependency
+- Scientific validity level
+
+Controls must affect actual simulation
+state or observable animation behavior.
+
+Do not create fake sliders that merely
+change a displayed number.
+
+Example:
+
+Cardiovascular Module:
+
+Heart Rate
+Playback Speed
+
+Respiratory Module:
+
+Breathing Rate
+Playback Speed
+
+Neural Module:
+
+Signal Playback Speed
+
+Only introduce additional physiological
+variables when the model can support them.
+
+Create Reset to Defaults functionality.
+
+Prevent invalid values.
+
+Clearly separate editable model inputs
+from derived outputs.
+
+================================================================
+17 — REAL-TIME EDUCATIONAL CHARTS
+================================================================
+
+Build a reusable scientific chart system.
+
+Consider a suitable compatible library,
+such as Recharts, for educational plots.
+
+Chart types:
+
+Time-Series Charts
+Cycle Phase Diagrams
+State Indicators
+Educational Waveforms
+Directional Flow Diagrams
+
+Potential visualizations:
+
+Cardiac Cycle Timing
+Schematic ECG
+Respiratory Cycle
+Schematic Membrane Potential
+Simulation Parameter History
+
+Charts must synchronize with the
+simulation timeline.
+
+Provide:
+
+Pause
+Resume
+Reset
+Legend
+Axis Labels
+Units
+Scenario Information
+
+Use numerical charts only when their
+data derives from actual documented
+model calculations.
+
+Otherwise label them clearly as
+schematic educational graphics.
+
+Never display fabricated measurements
+as clinically observed values.
+
+================================================================
+18 — ANATOMY AND PHYSIOLOGY INTEGRATION
+================================================================
+
+Fully integrate the new physiology
+laboratory into the existing
+Phase 02 anatomical atlas.
+
+Expected workflow:
+
+User selects the Heart in Anatomy.
+
+User opens:
+
+"Explore Function"
+
+The application navigates to
+the Cardiac Physiology Laboratory.
+
+The selected anatomical structure
+and its associated metadata
+must be preserved.
+
+The same principle applies to:
+
+Lungs
+Brain / Neuronal Structures
+Kidneys
+Digestive Organs
+
+Use stable anatomical structure IDs.
+
+Do not duplicate conflicting medical
+content across separate modules.
+
+Users must be able to return to
+the relevant anatomical view.
+
+Support deep links to functioning
+physiology modules.
+
+================================================================
+19 — BILINGUAL SCIENTIFIC EXPLANATIONS
+================================================================
+
+Every educational process must provide
+Arabic and English explanations.
+
+Examples:
+
+CARDIAC SYSTOLE
+الانقباض القلبي
+
+CARDIAC DIASTOLE
+الانبساط القلبي
+
+PULMONARY VENTILATION
+التهوية الرئوية
+
+GAS EXCHANGE
+تبادل الغازات
+
+ACTION POTENTIAL
+جهد الفعل
+
+GLOMERULAR FILTRATION
+الترشيح الكبيبي
+
+PERISTALSIS
+الحركة الدودية
+
+The explanation panel must include:
+
+Process Name
+Scientific Definition
+Anatomical Structures
+Sequence of Events
+Biological Function
+Related Physiology Concepts
+Clinical Relevance
+Scientific References
+
+Use appropriate established Arabic
+medical terminology.
+
+Implement proper RTL layout.
+
+Keep scientific symbols and units
+correctly oriented.
+
+Preserve anatomical left-right meaning.
+
+Do not rely on machine-translated
+medical text without terminology review.
+
+================================================================
+20 — GUIDED INTERACTIVE LEARNING
+================================================================
+
+Build guided learning sequences.
+
+Example:
+
+UNDERSTANDING THE CARDIAC CYCLE
+
+STEP 01:
+Explore the four cardiac chambers.
+
+STEP 02:
+Observe atrial contraction.
+
+STEP 03:
+Observe ventricular contraction.
+
+STEP 04:
+Inspect valve behavior.
+
+STEP 05:
+Follow pulmonary circulation.
+
+STEP 06:
+Follow systemic circulation.
+
+STEP 07:
+Answer a short knowledge question.
+
+Provide similar lessons for
+the other implemented organ systems.
+
+A guided lesson may:
+
+Focus the camera
+Highlight a structure
+Pause the animation
+Display scientific explanations
+Resume the sequence
+Advance to another step
+
+Allow users to replay completed lessons.
+
+Store only necessary local
+educational progress.
+
+Do not falsely claim that users have
+completed lessons they did not complete.
+
+================================================================
+21 — EDUCATIONAL ASSESSMENT
+================================================================
+
+Implement a small interactive
+physiology quiz engine.
+
+Question formats:
+
+Single Choice
+Identify Anatomical Structure
+Order Physiological Events
+Match English and Arabic Terms
+Interpret an Educational Diagram
+
+Questions must link to
+scientifically supported content.
+
+Use meaningful immediate feedback.
+
+Show correct explanations.
+
+Track local quiz progress.
+
+Avoid generating medically inaccurate
+questions from unreviewed content.
+
+Do not require student accounts
+to use the initial quiz features.
+
+================================================================
+22 — SCIENTIFIC SOURCE MANAGEMENT
+================================================================
+
+Maintain a reliable scientific reference
+system across the platform.
+
+Potential reference sources:
+
+NCBI Bookshelf
+https://www.ncbi.nlm.nih.gov/books/
+
+MedlinePlus
+https://medlineplus.gov/
+
+NIH
+https://www.nih.gov/
+
+American Heart Association
+https://www.heart.org/
+
+Established physiology textbooks
+where citation and use are permitted.
+
+For each educational model record:
+
+Scientific Topic
+Source Title
+Source Link or Citation
+Model Version
+Equations if Applicable
+Parameter Definitions
+Assumptions
+Known Limitations
+Validation Status
+Medical Review Status
+Date of Last Review
+
+Do not fabricate citations,
+peer-review status, or clinical validation.
+
+Respect copyright and asset licenses.
+
+Where medical-source access is unavailable,
+mark the relevant item as pending verification.
+
+================================================================
+23 — SIMULATION MODEL REGISTRY
+================================================================
+
+Create a centralized model registry.
+
+Suggested TypeScript concepts:
+
+SimulationModel {
+  id
+  anatomicalSystemId
+  titleEnglish
+  titleArabic
+  scientificValidityLevel
+  description
+  parameterDefinitions
+  simulationImplementation
+  animationAssetIds
+  equationReferences
+  limitations
+  sources
+  reviewStatus
+  version
+}
+
+SimulationScenario {
+  id
+  modelId
+  defaultParameters
+  validParameterRanges
+  initialConditions
+  educationalObjectives
+  explanationSteps
+}
+
+SimulationState {
+  simulationTime
+  playbackSpeed
+  isRunning
+  currentPhase
+  parameterValues
+  modelOutputs
+  selectedStructureId
+}
+
+Use strict typing.
+
+Avoid hard-coded physiological assumptions
+distributed across UI components.
+
+Centralize model logic and scientific
+metadata for future maintenance.
+
+================================================================
+24 — VISUAL QUALITY AND MOTION
+================================================================
+
+The experience should resemble an
+advanced biomedical learning laboratory.
+
+Use:
+
+- High-quality anatomical lighting
+- Clean dark medical UI
+- Restrained cyan highlights
+- Accurate anatomical color coding
+- Carefully controlled particle effects
+- Smooth camera transitions
+- Readable scientific labels
+- Premium visualization materials
+- Realistic depth perception
+- Elegant state transitions
+
+Motion must clearly communicate
+physiological processes.
+
+Visual effects are subordinate
+to scientific accuracy.
+
+Avoid distracting decorative animations.
+
+Do not create unrealistic organ deformation
+solely for visual excitement.
+
+Provide camera presets appropriate
+to every simulation.
+
+Respect accessibility preferences
+for reduced motion.
+
+================================================================
+25 — MOBILE AND DESKTOP PERFORMANCE
+================================================================
+
+Ensure reliable operation in:
+
+Modern desktop browsers
+Android mobile browsers
+Modern tablets
+Supported WebGL environments
+
+Performance requirements:
+
+- Efficient scene updates
+- Stable frame scheduling
+- Adaptive rendering resolution
+- Lazy-loaded simulation modules
+- Optimized anatomical geometry
+- Efficient particles
+- Texture compression where supported
+- GPU resource cleanup
+- React component cleanup
+- Controlled chart update frequency
+- No duplicated animation loops
+- No memory accumulation during navigation
+
+Quality modes:
+
+LOW
+MEDIUM
+HIGH
+AUTO
+
+Do not sacrifice scientific content
+to improve frame rate.
+
+Offer simplified visualizations when
+device limitations require them.
+
+Use reduced complexity rather than
+incorrectly removing essential biology.
+
+================================================================
+26 — ASSET AND ANIMATION SAFETY
+================================================================
+
+Reuse verified Phase 02 assets.
+
+For each animation, verify:
+
+- Anatomical structure correspondence
+- Model coordinate compatibility
+- Rig compatibility
+- Model orientation
+- Source accuracy
+- Rendering performance
+- Asset licensing
+- Scientific limitations
+
+If the original organ model has no
+appropriate animation rig, do not
+force inaccurate deformation.
+
+Use a separate explicitly schematic
+animation when necessary.
+
+Do not mislabel schematic animation
+as high-fidelity physiological motion.
+
+When critical geometry is unavailable:
+
+1. Preserve the functional module.
+2. Provide an accurate educational
+   diagram when possible.
+3. Keep the scientific explanations.
+4. Mark unavailable 3D capabilities.
+5. Document the required asset.
+6. Provide a clear path for future integration.
+
+Never silently replace real anatomy
+with misleading synthetic geometry.
+
+================================================================
+27 — PREPARATION FOR PATHOLOGY
+================================================================
+
+Prepare the architecture for Phase 04.
+
+Future modules will compare:
+
+Normal Physiology
+versus
+Pathophysiological Changes
+
+Potential future topics:
+
+Cardiac Dysfunction
+Respiratory Disorders
+Renal Dysfunction
+Neurological Disorders
+Gastrointestinal Disorders
+
+In Phase 03, build only the
+necessary shared architecture and
+reusable model interfaces.
+
+Do not present disease-specific
+simulation outputs as clinically
+validated without supporting evidence.
+
+Do not implement fabricated
+disease diagnosis engines.
+
+Prepare relationships between:
+
+Anatomy
+Physiology
+Pathology
+Pharmacology
+Medical Terminology
+
+================================================================
+28 — IMPLEMENTATION SEQUENCE
+================================================================
+
+Execute work in the following order.
+
+STEP 01:
+Audit Phases 01 and 02.
+
+STEP 02:
+Repair critical integration defects.
+
+STEP 03:
+Build the reusable simulation clock
+and lifecycle management system.
+
+STEP 04:
+Create the physiology laboratory UI.
+
+STEP 05:
+Implement cardiac cycle visualization.
+
+STEP 06:
+Implement blood circulation visualization.
+
+STEP 07:
+Implement respiratory mechanics.
+
+STEP 08:
+Implement alveolar gas exchange.
+
+STEP 09:
+Implement neural signal visualization.
+
+STEP 10:
+Implement renal physiology education.
+
+STEP 11:
+Implement digestive physiology education.
+
+STEP 12:
+Create synchronized educational charts.
+
+STEP 13:
+Implement parameter and scenario controls.
+
+STEP 14:
+Integrate bilingual scientific descriptions.
+
+STEP 15:
+Connect anatomy and physiology navigation.
+
+STEP 16:
+Create guided lessons and educational quizzes.
+
+STEP 17:
+Optimize graphics and mobile responsiveness.
+
+STEP 18:
+Validate scientific models and descriptions.
+
+STEP 19:
+Run functional and regression tests.
+
+STEP 20:
+Prepare a complete engineering delivery report.
+
+Build functionality incrementally.
+
+Do not abandon earlier working modules
+to showcase unfinished new systems.
+
+================================================================
+29 — QUALITY ASSURANCE
+================================================================
+
+Perform available automated and
+manual browser validation.
+
+Test the following:
+
+[ ] Existing Phase 01 features remain functional.
+[ ] Existing Phase 02 features remain functional.
+[ ] Physiology laboratory route works.
+[ ] 3D organ scenes load correctly.
+[ ] Simulation playback starts.
+[ ] Pause freezes simulation time.
+[ ] Resume restores continuous playback.
+[ ] Reset restores initial conditions.
+[ ] Speed controls affect playback appropriately.
+[ ] Physiological parameters affect their models.
+[ ] Cardiac timeline progresses correctly.
+[ ] Valve states match documented cycle phases.
+[ ] Blood-flow pathways follow correct directions.
+[ ] Respiratory motion is synchronized.
+[ ] Gas exchange directions are correct.
+[ ] Neural signal animations operate.
+[ ] Renal educational sequence works.
+[ ] Digestive educational sequence works.
+[ ] Charts match simulation states.
+[ ] Scientific validity labels are visible.
+[ ] Arabic explanations are readable.
+[ ] English explanations are readable.
+[ ] Anatomy-to-physiology navigation works.
+[ ] Mobile touch controls work.
+[ ] Graphics resources are disposed correctly.
+[ ] No critical TypeScript errors remain.
+[ ] No severe browser runtime errors remain.
+[ ] Production build succeeds.
+
+Add automated tests for:
+
+Simulation time progression
+Pause and resume behavior
+Reset and reproducibility
+Parameter validation
+Scenario configuration
+State transitions
+Model lifecycle
+Bilingual terminology
+Navigation compatibility
+
+Use browser automation such as Playwright
+where supported.
+
+Do not claim a test passed without
+actually executing it.
+
+================================================================
+30 — PHASE 03 ACCEPTANCE CRITERIA
+================================================================
+
+The project must deliver:
+
+1. A working interactive physiology laboratory.
+
+2. A reusable, testable simulation engine.
+
+3. A functional cardiac-cycle learning experience.
+
+4. A synchronized educational blood-circulation view.
+
+5. An interactive breathing and gas-exchange module.
+
+6. A functional neural-signal learning module.
+
+7. An interactive nephron physiology module.
+
+8. A gastrointestinal function learning module.
+
+9. Functional simulation playback controls.
+
+10. Scientifically appropriate parameter interfaces.
+
+11. Synchronized educational visualizations.
+
+12. Bilingual Arabic-English explanations.
+
+13. Working connections to the anatomy atlas.
+
+14. Documented sources and model limitations.
+
+15. A responsive premium web interface.
+
+16. A successful production build.
+
+If full 3D animation is blocked by
+missing assets, deliver the functional
+educational implementation and report
+the exact limitation.
+
+Do not mark a blocked module as complete.
+
+Do not use attractive UI alone
+as proof of simulation completeness.
+
+================================================================
+31 — FINAL ENGINEERING REPORT
+================================================================
+
+After implementation, generate a report.
+
+A. APPLICATION STATUS
+
+Existing Phase 01 and Phase 02
+functionality retained.
+
+B. SIMULATION ENGINE
+
+Clock, scenarios, parameters,
+lifecycle, and reusable components.
+
+C. IMPLEMENTED PHYSIOLOGY
+
+For each system:
+
+- Functional capabilities
+- 3D assets used
+- Educational animation scope
+- Scientific validity level
+- Source references
+- Known limitations
+
+D. USER EXPERIENCE
+
+Arabic-English UI
+Mobile experience
+3D navigation
+Learning workflows
+
+E. SCIENTIFIC VALIDATION
+
+Verified references
+Pending reviews
+Model assumptions
+Numerical limitations
+
+F. PERFORMANCE
+
+Measured performance when available.
+Do not fabricate benchmark results.
+
+G. TESTING
+
+Passed tests
+Failed tests
+Blocked tests
+
+H. MISSING REQUIREMENTS
+
+Assets, scientific references,
+or implementation blockers.
+
+I. NEXT PHASE
+
+Prepare the existing application for:
+
+PHASE 04:
+ADVANCED PATHOLOGY, DISEASE PROGRESSION,
+NORMAL-VERSUS-DISEASED ANATOMY,
+AND CLINICAL EDUCATION.
+
+Do not automatically begin Phase 04.
+
+================================================================
+32 — FINAL EXECUTION ORDER
+================================================================
+
+START PHASE 03 NOW.
+
+Work directly inside the existing
+MEDVERSE 3D Google AI Studio project.
+
+Preserve all working features from
+Phases 01 and 02.
+
+Implement actual application code,
+working interactions, medical visualizations,
+data structures, educational content,
+and simulation components.
+
+Prefer reliable working implementations
+over exaggerated feature claims.
+
+Make the experience visually remarkable,
+scientifically responsible, technically
+robust, accessible, and bilingual.
+
+Maintain a clear distinction between
+illustration, educational computation,
+and scientifically validated models.
+
+Build, integrate, test, fix,
+and provide the final implementation report.
+
+DO NOT STOP AT PLANNING.
+
+EXECUTE THE SOFTWARE DEVELOPMENT.

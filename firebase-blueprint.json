@@ -1,0 +1,253 @@
+{
+  "entities": {
+    "UserLearningProfile": {
+      "title": "User Learning Profile",
+      "description": "Authenticated learner profile storing synced educational progress, bookmarks, and role metadata.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID matching the document ID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Learner display name (1..100 chars)."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["STUDENT", "EDITOR", "REVIEWER", "ADMIN"],
+          "description": "Role metadata; clients may only initialize STUDENT."
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "enum": ["en", "ar"],
+          "description": "Persisted bilingual preference."
+        },
+        "completedLessonIds": {
+          "type": "array",
+          "description": "Bounded list (<= 200) of completed lesson IDs."
+        },
+        "savedStructureIds": {
+          "type": "array",
+          "description": "Bounded list (<= 200) of bookmarked anatomical structure IDs."
+        },
+        "bookmarkedTermIds": {
+          "type": "array",
+          "description": "Bounded list (<= 200) of bookmarked medical term IDs."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp()), immutable after create."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp()) updated on each write."
+        }
+      },
+      "required": ["userId", "displayName", "role", "preferredLanguage", "completedLessonIds", "savedStructureIds", "bookmarkedTermIds", "createdAt", "updatedAt"]
+    },
+    "QuizAttemptRecord": {
+      "title": "Quiz Attempt Record",
+      "description": "Persisted educational assessment attempt under a user's private subcollection.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner UID matching parent userId."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Assessment discipline identifier (1..60 chars)."
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "ALL"],
+          "description": "Assessment difficulty tier."
+        },
+        "score": {
+          "type": "integer",
+          "description": "Number of correct answers (>= 0)."
+        },
+        "totalQuestions": {
+          "type": "integer",
+          "description": "Total questions in attempt (1..100)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["userId", "subject", "difficulty", "score", "totalQuestions", "createdAt"]
+    },
+    "LearningActivityRecord": {
+      "title": "Learning Activity Record",
+      "description": "Recent educational activity log entry for a signed-in student.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner UID matching parent userId."
+        },
+        "activityType": {
+          "type": "string",
+          "enum": ["ANATOMY", "PHYSIOLOGY", "PATHOLOGY", "PHARMACOLOGY", "LESSON", "QUIZ", "AI_TUTOR"],
+          "description": "Category of educational activity."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Validated target entity ID (1..100 chars)."
+        },
+        "titleEn": {
+          "type": "string",
+          "description": "English summary label (1..160 chars)."
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Arabic summary label (1..160 chars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["userId", "activityType", "targetId", "titleEn", "titleAr", "createdAt"]
+    },
+    "CmsContentRecord": {
+      "title": "Medical CMS Editorial Record",
+      "description": "Governed bilingual medical education article, structure, disease, drug, or lesson draft/publication.",
+      "type": "object",
+      "properties": {
+        "titleEn": {
+          "type": "string",
+          "description": "English title (3..160 chars)."
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Arabic title (3..160 chars)."
+        },
+        "contentType": {
+          "type": "string",
+          "enum": ["ANATOMY", "PHYSIOLOGY", "PATHOLOGY", "PHARMACOLOGY", "TERMINOLOGY", "LESSON", "ASSET_META"],
+          "description": "Medical discipline category."
+        },
+        "systemId": {
+          "type": "string",
+          "description": "Linked body system identifier (1..64 chars)."
+        },
+        "summaryEn": {
+          "type": "string",
+          "description": "English educational body text (10..4000 chars)."
+        },
+        "summaryAr": {
+          "type": "string",
+          "description": "Arabic educational body text (10..4000 chars)."
+        },
+        "scientificReferences": {
+          "type": "string",
+          "description": "Authoritative citation notes (3..1000 chars)."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["DRAFT", "PENDING_REVIEW", "APPROVED", "PUBLISHED", "NEEDS_UPDATE", "ARCHIVED"],
+          "description": "Editorial governance workflow state."
+        },
+        "authorUid": {
+          "type": "string",
+          "description": "Author Firebase UID."
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Author display name (1..100 chars)."
+        },
+        "reviewerUid": {
+          "type": "string",
+          "description": "Optional reviewer UID after review."
+        },
+        "reviewerName": {
+          "type": "string",
+          "description": "Optional reviewer display name."
+        },
+        "version": {
+          "type": "integer",
+          "description": "Monotonic content revision number (>= 1)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp()), immutable."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["titleEn", "titleAr", "contentType", "systemId", "summaryEn", "summaryAr", "scientificReferences", "status", "authorUid", "authorName", "version", "createdAt", "updatedAt"]
+    },
+    "EditorialAuditLog": {
+      "title": "Editorial Governance Audit Log",
+      "description": "Append-only audit trail for privileged medical content state transitions.",
+      "type": "object",
+      "properties": {
+        "actorUid": {
+          "type": "string",
+          "description": "UID of editor, reviewer, or administrator."
+        },
+        "actorName": {
+          "type": "string",
+          "description": "Actor display name (1..100 chars)."
+        },
+        "action": {
+          "type": "string",
+          "enum": ["CREATE_DRAFT", "EDIT_DRAFT", "SUBMIT_REVIEW", "APPROVE", "REQUEST_UPDATE", "PUBLISH", "ARCHIVE"],
+          "description": "Privileged workflow action."
+        },
+        "targetEntryId": {
+          "type": "string",
+          "description": "Document ID of the affected CMS record."
+        },
+        "newStatus": {
+          "type": "string",
+          "enum": ["DRAFT", "PENDING_REVIEW", "APPROVED", "PUBLISHED", "NEEDS_UPDATE", "ARCHIVED"],
+          "description": "Resulting editorial status."
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional review or publication note (<= 500 chars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["actorUid", "actorName", "action", "targetEntryId", "newStatus", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserLearningProfile" },
+      "description": "Per-user learning profile and synced bookmarks/lesson progress."
+    },
+    "/users/{userId}/quizAttempts/{attemptId}": {
+      "schema": { "$ref": "#/entities/QuizAttemptRecord" },
+      "description": "Private user-scoped educational quiz attempt history."
+    },
+    "/users/{userId}/activityLog/{activityId}": {
+      "schema": { "$ref": "#/entities/LearningActivityRecord" },
+      "description": "Private user-scoped recent educational activity entries."
+    },
+    "/cmsContent/{entryId}": {
+      "schema": { "$ref": "#/entities/CmsContentRecord" },
+      "description": "Governed bilingual medical CMS articles and review queue entries."
+    },
+    "/auditLogs/{logId}": {
+      "schema": { "$ref": "#/entities/EditorialAuditLog" },
+      "description": "Append-only audit log for editorial workflow transitions."
+    }
+  }
+}

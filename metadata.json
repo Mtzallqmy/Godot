@@ -1,0 +1,6 @@
+{
+  "name": "MedVerse 3D",
+  "description": "Bilingual Arabic-English interactive 3D human anatomy, physiology, pathology, and pharmacology educational platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

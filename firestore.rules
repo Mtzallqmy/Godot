@@ -1,0 +1,296 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -------------------------------------------------------------------------
+    // Pillar 0: Global Default-Deny Catch-All
+    // -------------------------------------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // -------------------------------------------------------------------------
+    // Global Hardened Security Primitives
+    // -------------------------------------------------------------------------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isBootstrappedAdmin() {
+      return isSignedIn() &&
+             'email_verified' in request.auth.token &&
+             request.auth.token.email_verified == true &&
+             'email' in request.auth.token &&
+             request.auth.token.email == 'zydealwajee712@gmail.com';
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() ||
+             (isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    function isReviewer() {
+      return isAdmin() ||
+             (isSignedIn() && exists(/databases/$(database)/documents/reviewers/$(request.auth.uid)));
+    }
+
+    function isEditor() {
+      return isReviewer() ||
+             (isSignedIn() && exists(/databases/$(database)/documents/editors/$(request.auth.uid)));
+    }
+
+    function isValidBoundedStringList(arr, maxLen) {
+      return arr is list && arr.size() <= maxLen && (arr.size() == 0 || arr[0] is string);
+    }
+
+    // -------------------------------------------------------------------------
+    // Entity Validation Blueprints (Anti-Update-Gap)
+    // -------------------------------------------------------------------------
+    function isValidUserLearningProfile(data, pathUserId) {
+      return data.keys().hasAll([
+               'userId', 'displayName', 'role', 'preferredLanguage',
+               'completedLessonIds', 'savedStructureIds', 'bookmarkedTermIds',
+               'createdAt', 'updatedAt'
+             ]) &&
+             data.keys().hasOnly([
+               'userId', 'displayName', 'role', 'preferredLanguage',
+               'completedLessonIds', 'savedStructureIds', 'bookmarkedTermIds',
+               'createdAt', 'updatedAt'
+             ]) &&
+             data.userId is string && data.userId == pathUserId && data.userId.size() <= 128 &&
+             data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 100 &&
+             data.role in ['STUDENT', 'EDITOR', 'REVIEWER', 'ADMIN'] &&
+             data.preferredLanguage in ['en', 'ar'] &&
+             isValidBoundedStringList(data.completedLessonIds, 200) &&
+             isValidBoundedStringList(data.savedStructureIds, 200) &&
+             isValidBoundedStringList(data.bookmarkedTermIds, 200) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidQuizAttempt(data, pathUserId) {
+      return data.keys().hasAll(['userId', 'subject', 'difficulty', 'score', 'totalQuestions', 'createdAt']) &&
+             data.keys().hasOnly(['userId', 'subject', 'difficulty', 'score', 'totalQuestions', 'createdAt']) &&
+             data.userId is string && data.userId == pathUserId && data.userId.size() <= 128 &&
+             data.subject is string && data.subject.size() >= 1 && data.subject.size() <= 60 &&
+             data.difficulty in ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'ALL'] &&
+             data.score is int && data.score >= 0 && data.score <= data.totalQuestions &&
+             data.totalQuestions is int && data.totalQuestions >= 1 && data.totalQuestions <= 100 &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidLearningActivity(data, pathUserId) {
+      return data.keys().hasAll(['userId', 'activityType', 'targetId', 'titleEn', 'titleAr', 'createdAt']) &&
+             data.keys().hasOnly(['userId', 'activityType', 'targetId', 'titleEn', 'titleAr', 'createdAt']) &&
+             data.userId is string && data.userId == pathUserId && data.userId.size() <= 128 &&
+             data.activityType in ['ANATOMY', 'PHYSIOLOGY', 'PATHOLOGY', 'PHARMACOLOGY', 'LESSON', 'QUIZ', 'AI_TUTOR'] &&
+             data.targetId is string && data.targetId.size() >= 1 && data.targetId.size() <= 100 &&
+             data.titleEn is string && data.titleEn.size() >= 1 && data.titleEn.size() <= 160 &&
+             data.titleAr is string && data.titleAr.size() >= 1 && data.titleAr.size() <= 160 &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidCmsContent(data) {
+      return data.keys().hasAll([
+               'titleEn', 'titleAr', 'contentType', 'systemId',
+               'summaryEn', 'summaryAr', 'scientificReferences',
+               'status', 'authorUid', 'authorName', 'version',
+               'createdAt', 'updatedAt'
+             ]) &&
+             data.keys().hasOnly([
+               'titleEn', 'titleAr', 'contentType', 'systemId',
+               'summaryEn', 'summaryAr', 'scientificReferences',
+               'status', 'authorUid', 'authorName', 'reviewerUid', 'reviewerName',
+               'version', 'createdAt', 'updatedAt'
+             ]) &&
+             data.titleEn is string && data.titleEn.size() >= 3 && data.titleEn.size() <= 160 &&
+             data.titleAr is string && data.titleAr.size() >= 3 && data.titleAr.size() <= 160 &&
+             data.contentType in ['ANATOMY', 'PHYSIOLOGY', 'PATHOLOGY', 'PHARMACOLOGY', 'TERMINOLOGY', 'LESSON', 'ASSET_META'] &&
+             data.systemId is string && data.systemId.size() >= 1 && data.systemId.size() <= 64 &&
+             data.summaryEn is string && data.summaryEn.size() >= 10 && data.summaryEn.size() <= 4000 &&
+             data.summaryAr is string && data.summaryAr.size() >= 10 && data.summaryAr.size() <= 4000 &&
+             data.scientificReferences is string && data.scientificReferences.size() >= 3 && data.scientificReferences.size() <= 1000 &&
+             data.status in ['DRAFT', 'PENDING_REVIEW', 'APPROVED', 'PUBLISHED', 'NEEDS_UPDATE', 'ARCHIVED'] &&
+             data.authorUid is string && data.authorUid.size() >= 1 && data.authorUid.size() <= 128 &&
+             data.authorName is string && data.authorName.size() >= 1 && data.authorName.size() <= 100 &&
+             (!('reviewerUid' in data) || data.reviewerUid == null || (data.reviewerUid is string && data.reviewerUid.size() <= 128)) &&
+             (!('reviewerName' in data) || data.reviewerName == null || (data.reviewerName is string && data.reviewerName.size() <= 100)) &&
+             data.version is int && data.version >= 1 && data.version <= 10000 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidAuditLog(data) {
+      return data.keys().hasAll(['actorUid', 'actorName', 'action', 'targetEntryId', 'newStatus', 'createdAt']) &&
+             data.keys().hasOnly(['actorUid', 'actorName', 'action', 'targetEntryId', 'newStatus', 'note', 'createdAt']) &&
+             data.actorUid is string && data.actorUid == request.auth.uid && data.actorUid.size() <= 128 &&
+             data.actorName is string && data.actorName.size() >= 1 && data.actorName.size() <= 100 &&
+             data.action in ['CREATE_DRAFT', 'EDIT_DRAFT', 'SUBMIT_REVIEW', 'APPROVE', 'REQUEST_UPDATE', 'PUBLISH', 'ARCHIVE'] &&
+             data.targetEntryId is string && data.targetEntryId.size() >= 1 && data.targetEntryId.size() <= 128 &&
+             data.newStatus in ['DRAFT', 'PENDING_REVIEW', 'APPROVED', 'PUBLISHED', 'NEEDS_UPDATE', 'ARCHIVED'] &&
+             (!('note' in data) || data.note == null || (data.note is string && data.note.size() <= 500)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    // -------------------------------------------------------------------------
+    // Role Registry Collections (Read-only to self, Admin-managed)
+    // -------------------------------------------------------------------------
+    match /admins/{uid} {
+      allow get: if isOwner(uid) || isAdmin();
+      allow list, write: if isAdmin();
+    }
+
+    match /reviewers/{uid} {
+      allow get: if isOwner(uid) || isAdmin();
+      allow list, write: if isAdmin();
+    }
+
+    match /editors/{uid} {
+      allow get: if isOwner(uid) || isAdmin();
+      allow list, write: if isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // User Learning Profile & Private Subcollections (Strict Owner Isolation)
+    // -------------------------------------------------------------------------
+    match /users/{userId} {
+      allow get: if isValidId(userId) && (isOwner(userId) || isAdmin());
+      allow list: if isAdmin();
+
+      // Prevent self-assigned privilege escalation on create: students must initialize role == 'STUDENT'
+      allow create: if isValidId(userId) &&
+                       isOwner(userId) &&
+                       isValidUserLearningProfile(incoming(), userId) &&
+                       (incoming().role == 'STUDENT' || isAdmin());
+
+      // Action-based partial update with immutable userId, createdAt, and non-escalatable role
+      allow update: if isValidId(userId) &&
+                       isValidUserLearningProfile(incoming(), userId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt && (
+                         (
+                           isOwner(userId) &&
+                           incoming().role == existing().role &&
+                           incoming().diff(existing()).affectedKeys().hasOnly([
+                             'displayName', 'preferredLanguage',
+                             'completedLessonIds', 'savedStructureIds',
+                             'bookmarkedTermIds', 'updatedAt'
+                           ])
+                         ) || (
+                           isAdmin() &&
+                           incoming().diff(existing()).affectedKeys().hasOnly(['role', 'updatedAt'])
+                         )
+                       );
+
+      allow delete: if isValidId(userId) && (isOwner(userId) || isAdmin());
+
+      match /quizAttempts/{attemptId} {
+        allow get: if isValidId(attemptId) && isOwner(userId);
+        allow list: if isOwner(userId);
+        allow create: if isValidId(attemptId) &&
+                         isOwner(userId) &&
+                         isValidQuizAttempt(incoming(), userId);
+        allow update: if false;
+        allow delete: if isValidId(attemptId) && isOwner(userId);
+      }
+
+      match /activityLog/{activityId} {
+        allow get: if isValidId(activityId) && isOwner(userId);
+        allow list: if isOwner(userId);
+        allow create: if isValidId(activityId) &&
+                         isOwner(userId) &&
+                         isValidLearningActivity(incoming(), userId);
+        allow update: if false;
+        allow delete: if isValidId(activityId) && isOwner(userId);
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // Medical CMS & Editorial Governance Collection
+    // -------------------------------------------------------------------------
+    match /cmsContent/{entryId} {
+      // Signed-in learners can read PUBLISHED content; editors/reviewers/admins can inspect full queue
+      allow get: if isValidId(entryId) && isSignedIn() && (existing().status == 'PUBLISHED' || isEditor());
+      allow list: if isSignedIn() && (resource.data.status == 'PUBLISHED' || isEditor());
+
+      // Only Editors/Admins can create drafts (no direct client bypass into PUBLISHED)
+      allow create: if isValidId(entryId) &&
+                       isSignedIn() &&
+                       isValidCmsContent(incoming()) &&
+                       incoming().authorUid == request.auth.uid &&
+                       incoming().status == 'DRAFT' &&
+                       incoming().version == 1 &&
+                       isEditor();
+
+      // Action-based editorial state machine with strict role boundaries
+      allow update: if isValidId(entryId) &&
+                       isSignedIn() &&
+                       isValidCmsContent(incoming()) &&
+                       incoming().authorUid == existing().authorUid &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().version >= existing().version && (
+                         // Action 1: Editor edits own DRAFT or NEEDS_UPDATE content or submits for review
+                         (
+                           isEditor() &&
+                           existing().status in ['DRAFT', 'NEEDS_UPDATE'] &&
+                           incoming().status in ['DRAFT', 'PENDING_REVIEW'] &&
+                           incoming().diff(existing()).affectedKeys().hasOnly([
+                             'titleEn', 'titleAr', 'systemId', 'summaryEn', 'summaryAr',
+                             'scientificReferences', 'status', 'version', 'updatedAt'
+                           ])
+                         ) ||
+                         // Action 2: Reviewer approves or requests update on PENDING_REVIEW
+                         (
+                           isReviewer() &&
+                           existing().status == 'PENDING_REVIEW' &&
+                           incoming().status in ['APPROVED', 'NEEDS_UPDATE'] &&
+                           incoming().reviewerUid == request.auth.uid &&
+                           incoming().diff(existing()).affectedKeys().hasOnly([
+                             'status', 'reviewerUid', 'reviewerName', 'updatedAt'
+                           ])
+                         ) ||
+                         // Action 3: Administrator publishes APPROVED content or archives/reopens
+                         (
+                           isAdmin() &&
+                           incoming().status in ['PUBLISHED', 'ARCHIVED', 'NEEDS_UPDATE', 'APPROVED'] &&
+                           incoming().diff(existing()).affectedKeys().hasOnly([
+                             'titleEn', 'titleAr', 'systemId', 'summaryEn', 'summaryAr',
+                             'scientificReferences', 'status', 'reviewerUid', 'reviewerName',
+                             'version', 'updatedAt'
+                           ])
+                         )
+                       );
+
+      allow delete: if isValidId(entryId) && isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // Editorial Governance Audit Log (Append-Only)
+    // -------------------------------------------------------------------------
+    match /auditLogs/{logId} {
+      allow get: if isValidId(logId) && isReviewer();
+      allow list: if isReviewer();
+      allow create: if isValidId(logId) &&
+                       isSignedIn() &&
+                       isValidAuditLog(incoming()) &&
+                       isEditor();
+      allow update, delete: if false;
+    }
+  }
+}
